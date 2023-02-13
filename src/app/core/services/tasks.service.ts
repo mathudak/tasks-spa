@@ -8,7 +8,7 @@ import { ITask } from '../interfaces';
   providedIn: 'root'
 })
 export class TasksService {
-  private readonly API_URL = `${environment.apiURL}/tasks/`;
+  private readonly API_URL = `${environment.apiURL}/tasks`;
 
   constructor(private http: HttpClient) { }
 
