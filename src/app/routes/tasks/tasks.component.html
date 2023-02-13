@@ -1,0 +1,29 @@
+<div>
+  <h4>Task list</h4>
+
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Type</th>
+      <th colspan="2">Action</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks$ | async">
+        <td>{{task.name}}</td>
+        <td>{{task.type}}</td>
+        <td>
+          <button>Edit</button>
+        </td>
+        <td>
+          <button (click)="deleteTask(task._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <td colspan="4">
+        <button (click)="addNewTask()">Add new task</button>
+      </td>
+    </tfoot>
+  </table>
+
+</div>
