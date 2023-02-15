@@ -13,6 +13,7 @@ import { ModalService } from 'src/app/core/providers';
 export class TasksComponent implements OnInit{
   tasks$: Observable <Array<ITask>> = EMPTY;
   taskID: string = '';
+  modalID: string = Date.now().toString();
 
   constructor(private tasksService: TasksService, private modalService: ModalService) {}
 
@@ -27,7 +28,7 @@ export class TasksComponent implements OnInit{
   deleteTask(_id: string | undefined): void {
     if(!!_id) {
       this.taskID = _id;
-      this.modalService.open('modal-1');
+      this.modalService.open(this.modalID);
     }
   }
 

@@ -31,7 +31,7 @@
   </table>
 </div>
 
-<app-modal id="modal-1">
+<app-modal [id]="modalID">
   <h4>Do you really want to delete this entry?</h4>
   <button (click)="close(true)">Confirm</button>
   <button (click)="close();">Cancel</button>
