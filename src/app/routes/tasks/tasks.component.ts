@@ -22,7 +22,7 @@ export class TasksComponent implements OnInit{
   }
 
   private loadTasks(): void {
-    this.tasks$ = this.tasksService.getTasks().pipe(tap(t => console.log(t)));
+    this.tasks$ = this.tasksService.getTasks();
   }
 
   deleteTask(_id: string | undefined): void {
@@ -43,9 +43,5 @@ export class TasksComponent implements OnInit{
     ).subscribe(() => {
       this.loadTasks();
     });    
-  }
-
-  addNewTask(): void {
-    console.log('Add new task');
   }
 }
