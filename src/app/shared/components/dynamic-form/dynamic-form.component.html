@@ -1,0 +1,48 @@
+<div class="dynamic-form">
+  <form [formGroup]="form">
+
+    <div *ngFor="let elem of controls" class="form-row">
+      <span [ngSwitch]="elem.type">
+        <!-- INPUT -->
+        <div *ngSwitchCase="controlType.INPUT">
+          <label [attr.for]="elem.name">{{elem.label}}</label>
+          <input [name]="elem.name" [formControl]="elem.control" type="text">
+        </div>
+        
+        <!-- SELECT -->
+        <div *ngSwitchCase="controlType.SELECT">
+          <label [attr.for]="elem.name">{{elem.label}}</label>
+          <select [name]="elem.name" [formControl]="elem.control">
+            <option *ngFor="let opt of elem.options" [value]="opt['value']">{{opt['label']}}</option>
+          </select>
+        </div>
+        
+        <!-- DATE -->
+        <div *ngSwitchCase="controlType.DATE">
+          <!-- TODO -->
+        </div>
+
+        <!-- TEXTAREA -->
+        <div *ngSwitchCase="controlType.TEXTAREA">
+          <!-- TODO -->
+        </div>
+
+        <!-- RADIO -->
+        <div *ngSwitchCase="controlType.RADIO">
+          <!-- TODO -->
+        </div>
+
+        <!-- CHECKBOX -->
+        <div *ngSwitchCase="controlType.CHECKBOX">
+          <!-- TODO -->
+        </div>
+
+        <!-- DEFAULT CASE - ERROR -->
+        <div *ngSwitchDefault>
+          <p class="msg-warning">Incorrect input type provided</p>
+        </div>
+
+      </span>
+    </div>
+  </form>
+</div>
