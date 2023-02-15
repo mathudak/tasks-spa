@@ -3,16 +3,18 @@
 
   <table>
     <thead>
-      <th>Name</th>
-      <th>Type</th>
-      <th colspan="2">Action</th>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th colspan="2">Action</th>
+      </tr>      
     </thead>
     <tbody>
       <tr *ngFor="let task of tasks$ | async">
         <td>{{task.name}}</td>
         <td>{{task.type}}</td>
         <td>
-          <button>Edit</button>
+          <button [routerLink]="['/task', task._id]">Edit</button>
         </td>
         <td>
           <button (click)="deleteTask(task._id)">Delete</button>
@@ -20,9 +22,11 @@
       </tr>
     </tbody>
     <tfoot>
-      <td colspan="4">
-        <button (click)="addNewTask()">Add new task</button>
-      </td>
+      <tr>
+        <td colspan="4">
+          <button routerLink="/task">Add new task</button>
+        </td>
+      </tr>      
     </tfoot>
   </table>
 
