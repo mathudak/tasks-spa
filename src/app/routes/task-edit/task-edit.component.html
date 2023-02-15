@@ -1,5 +1,16 @@
 <div class="edit-form">
-  <app-dynamic-form *ngIf="!!commonForm" [form]="commonForm.form" [controls]="commonForm.controls"></app-dynamic-form>
-  <p></p>
-  <app-dynamic-form *ngIf="!!dynamicForm" [form]="dynamicForm.form" [controls]="dynamicForm.controls"></app-dynamic-form>
+
+  <div class="form-row">
+    <app-dynamic-form *ngIf="!!commonForm" [form]="commonForm.form" [controls]="commonForm.controls"></app-dynamic-form>
+  </div>
+  
+  <div class="form-row">
+    <app-dynamic-form *ngIf="!!dynamicForm" [form]="dynamicForm.form" [controls]="dynamicForm.controls"></app-dynamic-form>
+  </div>
+  
+  <div class="action-fow">
+    <button (click)="cancel()">Cancel changes</button>
+    <button *ngIf="!!taskID" (click)="saveEdits()">Save changes</button>
+    <button *ngIf="!taskID" (click)="saveNew()">Add new task</button>
+  </div>
 </div>
