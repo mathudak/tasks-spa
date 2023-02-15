@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskEditComponent } from './task-edit/task-edit.component';
 import { routes } from './routes';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { routes } from './routes';
   ],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    SharedModule
   ],
   exports: [RouterModule]
 })

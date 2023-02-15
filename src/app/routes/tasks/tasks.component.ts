@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ITask } from 'src/app/core/interfaces';
 import { TasksService } from 'src/app/core/services';
-import { Observable, EMPTY } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, EMPTY, of } from 'rxjs';
+import { filter, finalize, switchMap, tap } from 'rxjs/operators';
+import { ModalService } from 'src/app/core/providers';
 
 @Component({
   selector: 'app-tasks',
@@ -11,15 +12,36 @@ import { tap } from 'rxjs/operators';
 })
 export class TasksComponent implements OnInit{
   tasks$: Observable <Array<ITask>> = EMPTY;
+  taskID: string = '';
 
-  constructor(private tasksService: TasksService) {}
+  constructor(private tasksService: TasksService, private modalService: ModalService) {}
 
   ngOnInit(): void {
+    this.loadTasks();
+  }
+
+  private loadTasks(): void {
     this.tasks$ = this.tasksService.getTasks().pipe(tap(t => console.log(t)));
   }
 
   deleteTask(_id: string | undefined): void {
-    console.log('Task ID to delete:', _id);
+    if(!!_id) {
+      this.taskID = _id;
+      this.modalService.open('modal-1');
+    }
+  }
+
+  close(confirmDelete: boolean = false): void {
+    of(confirmDelete).pipe(
+      filter(confirmDelete => confirmDelete),
+      switchMap(() => this.tasksService.deleteTask(this.taskID)),
+      finalize(() => {
+        this.taskID = '';
+        this.modalService.close();
+      })
+    ).subscribe(() => {
+      this.loadTasks();
+    });    
   }
 
   addNewTask(): void {

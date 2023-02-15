@@ -31,3 +31,10 @@
   </table>
 
 </div>
+
+<app-modal id="modal-1">
+  <h1>Do you really want to delete this entry?</h1>
+  <p>Close with the button below or by clicking the background.</p>
+  <button (click)="close(true)">Confirm</button>
+  <button (click)="close();">Cancel</button>
+</app-modal>

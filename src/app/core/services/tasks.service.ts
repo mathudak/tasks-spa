@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ITask } from '../interfaces';
 
@@ -28,7 +28,7 @@ export class TasksService {
     return this.http.put(`${this.API_URL}/${task.id}`, task);
   }
 
-  deleteTast(id: string): Observable<any> {
+  deleteTask(id: string): Observable<any> {
     return this.http.delete(`${this.API_URL}/${id}`);
   }
 }
