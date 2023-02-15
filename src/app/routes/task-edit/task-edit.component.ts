@@ -61,7 +61,14 @@ export class TaskEditComponent implements OnInit, OnDestroy {
 
   private getFormsValues(): ITask {
     const {name, type } = this.commonForm.form.value;
-    const fields = this.dynamicForm.form.value;
+    let fields = this.dynamicForm.form.value;
+
+    if (type === ETaskType.WASH_DISHES) {
+      const helper = fields as IWashDishes;
+      helper.durationInHours = parseFloat(helper.durationInHours.toString());
+      fields = {...fields, ...helper};
+    }
+
     return !!this.taskID ? {_id: this.taskID, name, type, fields } : { name, type, fields };
   }
 

@@ -10,7 +10,9 @@
   
   <div class="action-row">
     <button (click)="cancel()">Cancel changes</button>
-    <button *ngIf="!!taskID" (click)="saveEdits()">Save changes</button>
-    <button *ngIf="!taskID" (click)="saveNew()">Add new task</button>
+    <div *ngIf="!!commonForm && !!dynamicForm">
+      <button *ngIf="!!taskID" (click)="saveEdits()" [disabled]="!commonForm.form.valid || !dynamicForm.form.valid">Save changes</button>
+      <button *ngIf="!taskID" (click)="saveNew()" [disabled]="!commonForm.form.valid || !dynamicForm.form.valid">Add new task</button>
+    </div>
   </div>
 </div>
