@@ -1,9 +1,4 @@
-import { IVacuumClean, IWashDishes } from "src/app/core/interfaces";
-
-export const EmptyCommonFields: any = {
-  name: '',
-  type: ''
-}
+import { ETaskType, ITask, IVacuumClean, IWashDishes } from "src/app/core/interfaces";
 
 export const EmptyWashDishFields: IWashDishes = {
   durationInHours: 0
@@ -14,3 +9,8 @@ export const EmptyVacuumCleanFields: IVacuumClean = {
   who: ''
 }
 
+export const EmptyTask: ITask = {
+  name: '',
+  type: ETaskType.VACUUM_CLEAN,
+  fields: EmptyVacuumCleanFields
+}
