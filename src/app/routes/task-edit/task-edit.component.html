@@ -1,3 +1,5 @@
 <div class="edit-form">
-
+  <app-dynamic-form *ngIf="!!commonForm" [form]="commonForm.form" [controls]="commonForm.controls"></app-dynamic-form>
+  <p></p>
+  <app-dynamic-form *ngIf="!!dynamicForm" [form]="dynamicForm.form" [controls]="dynamicForm.controls"></app-dynamic-form>
 </div>

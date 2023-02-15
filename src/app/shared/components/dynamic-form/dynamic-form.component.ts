@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { EControlType, IDynamicControl } from 'src/app/core/interfaces';
+import { EControlType, DynamicControl } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -9,7 +9,7 @@ import { EControlType, IDynamicControl } from 'src/app/core/interfaces';
 })
 export class DynamicFormComponent implements OnInit {
   @Input() form!: FormGroup;
-  @Input() controls!: Array<IDynamicControl>;
+  @Input() controls!: Array<DynamicControl>;
   readonly controlType = EControlType;
 
   constructor() {}
