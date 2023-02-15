@@ -1,4 +1,4 @@
-import { FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 export enum EControlType {
   INPUT = 'input',
@@ -19,13 +19,18 @@ export interface IDynamicControl {
   control: FormControl;
 }
 
+export interface IDynamicForm {
+  form: FormGroup,
+  controls: Array<DynamicControl>
+}
+
 export class DynamicControl {
-  private name!: string;
-  private type!: EControlType;
-  private label!: string;
-  private value!: string | number | boolean;
-  private options?: Array<TOption>;
-  private control!: FormControl;
+  name!: string;
+  type!: EControlType;
+  label!: string;
+  value!: string | number | boolean;
+  options?: Array<TOption>;
+  control!: FormControl;
 
   constructor(name: string, value: string | number | boolean, type: EControlType) {
     this.name = name;
@@ -44,7 +49,7 @@ export class DynamicControl {
     this.control = new FormControl(this.value, required ? Validators.required : null);
   }
 
-  getControl(): IDynamicControl {
+  getDynamicControl(): IDynamicControl {
     return {
       name: this.name,
       label: this.label,
