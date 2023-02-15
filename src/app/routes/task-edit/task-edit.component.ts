@@ -66,7 +66,7 @@ export class TaskEditComponent implements OnInit, OnDestroy {
   }
 
   cancel(): void {
-    
+    this.router.navigate(['/', 'tasks']);
   }
 
   private handleCommonForm(task: ITask): void {

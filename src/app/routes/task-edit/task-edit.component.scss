@@ -1,0 +1,18 @@
+.edit-form {
+  width: 100%;
+  padding: 0 10%;
+  
+  .form-row {
+    margin: 1rem .5rem;
+  }
+
+  .action-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+
+    button {
+      margin-left: 0.5rem;
+    }
+  }
+}

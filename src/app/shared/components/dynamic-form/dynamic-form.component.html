@@ -4,13 +4,13 @@
     <div *ngFor="let elem of controls" class="form-row">
       <span [ngSwitch]="elem.type">
         <!-- INPUT -->
-        <div *ngSwitchCase="controlType.INPUT">
+        <div *ngSwitchCase="controlType.INPUT" class="form-field">
           <label [attr.for]="elem.name">{{elem.label}}</label>
           <input [name]="elem.name" [formControl]="elem.control" type="text">
         </div>
         
         <!-- SELECT -->
-        <div *ngSwitchCase="controlType.SELECT">
+        <div *ngSwitchCase="controlType.SELECT" class="form-field">
           <label [attr.for]="elem.name">{{elem.label}}</label>
           <select [name]="elem.name" [formControl]="elem.control">
             <option *ngFor="let opt of elem.options" [value]="opt['value']">{{opt['label']}}</option>
@@ -18,27 +18,27 @@
         </div>
         
         <!-- DATE -->
-        <div *ngSwitchCase="controlType.DATE">
+        <div *ngSwitchCase="controlType.DATE" class="form-field">
           <!-- TODO -->
         </div>
 
         <!-- TEXTAREA -->
-        <div *ngSwitchCase="controlType.TEXTAREA">
+        <div *ngSwitchCase="controlType.TEXTAREA" class="form-field">
           <!-- TODO -->
         </div>
 
         <!-- RADIO -->
-        <div *ngSwitchCase="controlType.RADIO">
+        <div *ngSwitchCase="controlType.RADIO" class="form-field">
           <!-- TODO -->
         </div>
 
         <!-- CHECKBOX -->
-        <div *ngSwitchCase="controlType.CHECKBOX">
+        <div *ngSwitchCase="controlType.CHECKBOX" class="form-field">
           <!-- TODO -->
         </div>
 
         <!-- DEFAULT CASE - ERROR -->
-        <div *ngSwitchDefault>
+        <div *ngSwitchDefault class="form-field">
           <p class="msg-warning">Incorrect input type provided</p>
         </div>
 
