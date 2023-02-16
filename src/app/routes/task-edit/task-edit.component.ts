@@ -26,6 +26,10 @@ export class TaskEditComponent implements OnInit, OnDestroy {
     private formFactory: FormFactoryService
   ) {}
 
+  /**
+   * Processes URL parameter 'ID' and either calls function to load task by ID
+   * or provides and EmptyTask to create a Common Form
+   */
   ngOnInit(): void {
     this.route.params.pipe(
       tap(({id}) => this.taskID = id),
@@ -43,26 +47,33 @@ export class TaskEditComponent implements OnInit, OnDestroy {
     });  
   }
 
+  /**
+   * Saves new Task, without provided ID
+   */
   saveNew(): void {
     const task = this.getFormsValues();
     this.tasksService.addTask(task).pipe(
       tap(() => this.saveSuccessful = true),
       debounceTime(1500)
-    ).subscribe(() => this.router.navigate(['..']));
+    ).subscribe(() => this.cancel());
   }
 
+  /**
+   * Saves changes to the Task, when ID was provided
+   */
   saveEdits(): void {
     const task = this.getFormsValues();
     this.tasksService.editTask(task).pipe(
       tap(() => this.saveSuccessful = true),
       debounceTime(1500)
-    ).subscribe(() => this.router.navigate(['..']));
+    ).subscribe(() => this.cancel());
   }
 
   private getFormsValues(): ITask {
     const {name, type } = this.commonForm.form.value;
     let fields = this.dynamicForm.form.value;
 
+    // Lazy solution to make sure 'durationInHours' is number
     if (type === ETaskType.WASH_DISHES) {
       const helper = fields as IWashDishes;
       helper.durationInHours = parseFloat(helper.durationInHours.toString());
@@ -76,6 +87,12 @@ export class TaskEditComponent implements OnInit, OnDestroy {
     this.router.navigate(['/', 'tasks']);
   }
 
+  /**
+   * Creates 'Common' form from fields that are same for all task types.
+   * Sets 'toggle' functionality for Type select.
+   * 
+   * @param task - ITask object
+   */
   private handleCommonForm(task: ITask): void {
     const commonControls = this.formFactory.processTaskObject(task);
     this.commonForm = this.formFactory.buildForm(commonControls);
@@ -87,6 +104,13 @@ export class TaskEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Bind 'toggle' functionality to provided control of 'SELECT' type which
+   * allows form dynamic change of displayed form.
+   * 
+   * @param toggler - DynamicControl object containing the 'Toggler' controler
+   * @param task - Currently displayed Task to provide values for a newly created form
+   */
   private setTypeFields(toggler: DynamicControl, task: ITask): void {
     toggler.control.valueChanges
       .pipe(
